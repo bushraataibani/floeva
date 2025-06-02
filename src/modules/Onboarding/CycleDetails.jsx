@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import { Formik } from "formik";
 import * as yup from "yup";
 
-const CycleDetails = ({ data, onComplete }) => {
+const CycleDetails = ({ data, onComplete, setOnboardingData }) => {
   const schema = yup.object({
     avgPeriodLength: yup.number().required("Period Length is required").min(1).typeError("Must be a number"),
     avgCycleLength: yup.number().required("Cycle Length is required").min(1).typeError("Must be a number"),
@@ -28,6 +28,15 @@ const CycleDetails = ({ data, onComplete }) => {
       onSubmit={(values) => {
         console.log('values', values)
         onComplete(values);
+        setOnboardingData(prev => ({
+          ...prev,
+          cycleDetails: {
+            avgPeriodLength: values.avgPeriodLength,
+            avgCycleLength: values.avgCycleLength,
+            lastPeriodStartDate: values.lastPeriodStartDate,
+            isPeriodRegular: values.isPeriodRegular
+          }
+        }));
       }}
     >
       {({

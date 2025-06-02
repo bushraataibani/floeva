@@ -50,8 +50,23 @@ const LoginForm = () => {
     // Save session (optional)
     localStorage.setItem("loggedInUser", JSON.stringify(existingUser));
 
-    // Redirect to home
-    navigate("/home");
+    // Redirect to home or calendar
+    let onboardingData = localStorage.getItem("onboardingData");
+
+    if (onboardingData) {
+      try {
+        const parsedData = JSON.parse(onboardingData);
+        if (parsedData.personalInfo?.email === email) {
+          navigate("/calendar");
+        } else {
+          navigate("/home");
+        }
+      } catch (error) {
+        navigate("/home");
+      }
+    } else {
+      navigate("/home");
+    }
   };
 
   return (

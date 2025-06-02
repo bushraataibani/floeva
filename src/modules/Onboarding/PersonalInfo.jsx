@@ -8,7 +8,7 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 
-const PersonalInfo = ({ data, onComplete }) => {
+const PersonalInfo = ({ data, onComplete, setOnboardingData }) => {
   const schema = yup.object({
     name: yup.string().trim().required("Name is required"),
     age: yup.number().required("Age is required").min(1).typeError("Must be a number"),
@@ -22,6 +22,16 @@ const PersonalInfo = ({ data, onComplete }) => {
       initialValues={data}
       onSubmit={(values) => {
         onComplete(values);
+        setOnboardingData(prev => ({
+          ...prev,
+          personalInfo: {
+            ...prev.personalInfo,
+            name: values.name,
+            age: values.age,
+            phone: values.phone,
+            email: values.email
+          }
+        }));
       }}
     >
       {({

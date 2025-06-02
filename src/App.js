@@ -7,6 +7,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Onboarding from "./modules/Onboarding/Onboarding";
+import Calendar from "./modules/Calendar/Calendar";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/home" element={<Home />} />
       <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/calendar" element={<Calendar />} />
     </Routes>
   );
 }
